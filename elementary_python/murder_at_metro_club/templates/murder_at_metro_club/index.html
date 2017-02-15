@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<title>Elementary Python - Murder at the Metropolitan Club</title>
+<body>
+
+<h1>Murder at the Metropolitan Club</h1>
+{% if suspect_list %}
+    <ul>
+      {% for suspect in suspect_list %}
+      <li><a href="/murder_at_metro_club/{{ suspect.id }}/">{{ suspect.id }}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No suspects available.</p>
+    {% endif %}
+
+</body>
+</html>

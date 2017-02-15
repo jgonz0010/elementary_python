@@ -9,4 +9,9 @@ class Suspect(models.Model):
     is_murderer = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name + " " + self.hair + " " + self.attire
+        return (
+        "\nSuspect Name: " + self.name +
+        "\nSuspect Hair: " + self.hair +
+        "\nSuspect Attire: " + self.attire +
+        "\nSuspect Room: " + str(self.room) +
+        "\nIs Murderer: " + str(self.is_murderer));
