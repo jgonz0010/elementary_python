@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Suspects Details..</title>
+</head>
+<body>
+  <h1>Edit Suspects Details</h1>
+  {% if suspect_list %}
+
+      <ul>
+        {% for suspect in suspect_list %}
+        <form id="suspect_data_{{ suspect.id }}" method="post" action="">
+          {% csrf_token %}
+          <div>
+            <label hidden>ID
+                <input type="text" id="{{ suspect.id }}" name="{{ suspect.id }}" value="{{ suspect.id }}" readonly hidden>
+            </label>
+            <label>Name
+                <input type="text" id="suspect_name_{{ suspect.id }}" name="suspect_name_{{ suspect.id }}" value="{{ suspect.name }}" readonly>
+            </label>
+            <label>Hair Color
+                <input type="text" id="suspect_hair_{{ suspect.id }}" name="suspect_hair_{{ suspect.id }}" value="{{ suspect.hair }}">
+            </label>
+            <label>Attire
+                <input type="text" id="suspect_attire_{{ suspect.id }}" name="suspect_attire_{{ suspect.id }}"  value="{{ suspect.attire }}">
+            </label>
+            <label>Room Number
+                <input type="text" id="suspect_room_{{ suspect.id }}" name="suspect_room_{{ suspect.id }}"  value="{{ suspect.room }}">
+            </label>
+        </div>
+        <div>
+          <button type="submit">update</button>
+        </div>
+      </form>
+        {% endfor %}
+      </ul>
+
+      {% else %}
+      <p>No suspects available.</p>
+      {% endif %}
+</body>
+</html>

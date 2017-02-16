@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<title>Suspect Details</title>
+<body>
+
+<div>
+  {% if suspect %}
+    <h1>Suspect Details for...</h1>
+    <p>Name: {{ suspect.name }}</p>
+    <p>Hair Color: {{ suspect.hair }}</p>
+    <p>Attire: {{ suspect.attire }}</p>
+    <p>Room Number: {{ suspect.room }}</p>
+    <p>Guilty: {{ suspect.is_murderer }}</p>
+  {% else %}
+    <p>No details available.</p>
+  {% endif %}
+</div>
+</body>
+</html>

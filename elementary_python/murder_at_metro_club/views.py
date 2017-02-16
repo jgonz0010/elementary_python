@@ -13,12 +13,27 @@ def index( request ):
 
 def detail(request, suspect_id):
     suspect = Suspect.objects.get(pk=suspect_id)
-    return HttpResponse( "You're looking at the details for Suspect %s. %s"
-        % (suspect_id, suspect))
+    template = loader.get_template('murder_at_metro_club/details.html')
+    context = {
+        'suspect': suspect
+    }
+    return HttpResponse(template.render(context, request))
+
+def edit(request, suspect_id):
+    if request.method == 'POST':
+        print(request.POST.get(suspect_id))
+        print(request.POST.get('suspect_name_1'))
+        print(request.POST.get('suspect_hair_1'))
+        print(request.POST.get('suspect_attire_1'))
+        print(request.POST.get('suspect_room_1'))
+
+    suspect_list = Suspect.objects.order_by('id');
+    template = loader.get_template('murder_at_metro_club/edit.html')
+    context = {
+        'suspect_list': suspect_list
+    }
+    return HttpResponse(template.render(context, request))
 
 def results(request, suspect_id):
     response = "You are looking at the results of Suspect %s."
     return HttpResponse(response % suspect_id)
-
-def edit(request, suspect_id):
-    return HttpResponse("You are now editing information for Suspect %s." % suspect_id)

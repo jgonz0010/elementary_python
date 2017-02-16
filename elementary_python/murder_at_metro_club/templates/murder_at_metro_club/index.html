@@ -4,10 +4,12 @@
 <body>
 
 <h1>Murder at the Metropolitan Club</h1>
+
+<h3>The following is a list of suspects. Click on one below to see their details.<h3>
 {% if suspect_list %}
     <ul>
       {% for suspect in suspect_list %}
-      <li><a href="/murder_at_metro_club/{{ suspect.id }}/">{{ suspect.id }}</a></li>
+      <li><a href="/murder_at_metro_club/{{ suspect.id }}/">{{ suspect.name }}</a></li>
       {% endfor %}
     </ul>
     {% else %}
