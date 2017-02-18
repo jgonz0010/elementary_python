@@ -19,18 +19,29 @@ def detail(request, suspect_id):
     }
     return HttpResponse(template.render(context, request))
 
-def edit(request, suspect_id):
-    if request.method == 'POST':
-        print(request.POST.get(suspect_id))
-        print(request.POST.get('suspect_name_1'))
-        print(request.POST.get('suspect_hair_1'))
-        print(request.POST.get('suspect_attire_1'))
-        print(request.POST.get('suspect_room_1'))
-
+def edit(request):
     suspect_list = Suspect.objects.order_by('id');
+    murderer = ''
+    for suspect in suspect_list:
+        if request.method == 'POST':
+            suspect.id = request.POST.get(str(suspect.id))
+            suspect.name = request.POST.get("suspect_name_" + str(suspect.id))
+            suspect.hair = request.POST.get("suspect_hair_" + str(suspect.id))
+            suspect.attire = request.POST.get("suspect_attire_" + str(suspect.id))
+            suspect.room = request.POST.get("suspect_room_" + str(suspect.id))
+            if suspect.room == 10:
+                suspect.room = 0
+            if (string.lower(suspect.hair) == 'brown' and
+            string.lower(suspect.attire) == 'pince-nez' and
+            string.lower(suspect.room == 10)):
+                suspect.is_murderer = True
+                murderer = suspect.name
+            suspect.save()
+
     template = loader.get_template('murder_at_metro_club/edit.html')
     context = {
-        'suspect_list': suspect_list
+        'suspect_list': suspect_list,
+        'murderer': murderer
     }
     return HttpResponse(template.render(context, request))
 

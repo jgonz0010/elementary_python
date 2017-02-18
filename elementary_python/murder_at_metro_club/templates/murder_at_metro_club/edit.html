@@ -4,13 +4,30 @@
 <title>Edit Suspects Details..</title>
 </head>
 <body>
-  <h1>Edit Suspects Details</h1>
-  {% if suspect_list %}
+  <h1>Known Clues</h1>
+  <ul>
+    <li>Sir Raymond Jasper occupied room 10.</li>
+    <li>Mr. Pope always carried a gold pocket watch.</li>
+    <li>Mr. Hollman wore a ruby signet ring.</li>
+    <li>Mr. Hollman occupied room 12.</li>
+    <li>The man occupying room 14 had black hair.</li>
+    <li>Either Sir Raymond or Col. Woodley wore a pince-nez.</li>
+    <li>The man with pince-nez had brown hair.</li>
+    <li>The man wiht tattered cuffs had red hair.</li>
+    <li>The man is room 16 had tattered cuffs.</li>
+    <li>The man in room 12 had grey hair.</li>
+    <li>The man with the gold pocket watch occupied room 14.</li>
+    <li>Col. Woodley occupied a corner room.</li>
+    <li>The murderer had brown hair.</li>
+  </ul>
 
+  <h1>Edit Suspects Details</h1>
+  <p>Fill in the data below based on the above clues.</p>
+  {% if suspect_list %}
+  <form id="suspect_data" method="post" action="">
+    {% csrf_token %}
       <ul>
         {% for suspect in suspect_list %}
-        <form id="suspect_data_{{ suspect.id }}" method="post" action="">
-          {% csrf_token %}
           <div>
             <label hidden>ID
                 <input type="text" id="{{ suspect.id }}" name="{{ suspect.id }}" value="{{ suspect.id }}" readonly hidden>
@@ -28,15 +45,19 @@
                 <input type="text" id="suspect_room_{{ suspect.id }}" name="suspect_room_{{ suspect.id }}"  value="{{ suspect.room }}">
             </label>
         </div>
-        <div>
-          <button type="submit">update</button>
-        </div>
-      </form>
         {% endfor %}
       </ul>
+      <div>
+        <button type="submit">update</button>
+      </div>
 
+</form>
       {% else %}
       <p>No suspects available.</p>
       {% endif %}
+
+      <h1>The Murderer Revealed</h1>
+      <p>The murderer is...</p>
+      <h2> {{ murderer }} </h2
 </body>
 </html>

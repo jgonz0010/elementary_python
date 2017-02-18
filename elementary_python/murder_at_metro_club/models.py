@@ -10,6 +10,7 @@ class Suspect(models.Model):
 
     def __str__(self):
         return (
+        "\nSuspect Id: " + str(self.id) +
         "\nSuspect Name: " + self.name +
         "\nSuspect Hair: " + self.hair +
         "\nSuspect Attire: " + self.attire +
