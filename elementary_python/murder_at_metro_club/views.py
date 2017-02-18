@@ -29,14 +29,18 @@ def edit(request):
             suspect.hair = request.POST.get("suspect_hair_" + str(suspect.id))
             suspect.attire = request.POST.get("suspect_attire_" + str(suspect.id))
             suspect.room = request.POST.get("suspect_room_" + str(suspect.id))
-            if suspect.room == 10:
+            if suspect.room == '':
                 suspect.room = 0
-            if (string.lower(suspect.hair) == 'brown' and
-            string.lower(suspect.attire) == 'pince-nez' and
-            string.lower(suspect.room == 10)):
+            if (suspect.hair.lower() == 'brown' and
+            suspect.attire.lower() == 'pince-nez' and
+            suspect.room == 10):
                 suspect.is_murderer = True
-                murderer = suspect.name
+            else:
+                suspect.is_murderer = False
             suspect.save()
+
+        if suspect.is_murderer == True:
+            murderer = suspect.name
 
     template = loader.get_template('murder_at_metro_club/edit.html')
     context = {
